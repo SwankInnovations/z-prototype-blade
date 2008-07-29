@@ -1,9 +1,65 @@
+:ruby
+  class NavItem < Array
+    attr_reader :name, :proper_name
+
+    def initialize(name, proper_name)
+      @name, @proper_name = name, proper_name
+    end
+
+    def [](id)
+      unless id.kind_of? Fixnum
+        self.find {|subitem| subitem.name.to_s == id.to_s }
+      else
+        super
+      end
+    end
+  end
+
+
+  class NavSubItem
+    attr_reader :name, :proper_name, :url
+
+    def initialize(name, proper_name, url = "#")
+      @name, @proper_name, @url = name, proper_name, url
+    end
+  end
+
+
+  dashboard = NavItem.new(:dashboard, "Dashboard")
+  dashboard << NavSubItem.new(:activity_feed, "Activity Feed")
+
+  content = NavItem.new(:content, "Content")
+  content << NavSubItem.new(:pages, "Pages", "/admin/pages/")
+  content << NavSubItem.new(:snippets, "Snippets", "/admin/snippets/")
+  content << NavSubItem.new(:articles, "Articles")
+  content << NavSubItem.new(:comments, "Comments")
+
+  design = NavItem.new(:design, "Design")
+  design << NavSubItem.new(:layouts, "Layouts", "/admin/layouts/")
+  design << NavSubItem.new(:stylesheets, "Stylesheets", "/admin/stylesheets/")
+  design << NavSubItem.new(:javascripts, "Javascripts", "/admin/javascripts/")
+
+  assets = NavItem.new(:assets, "Assets")
+  assets << NavSubItem.new(:files, "Files")
+  assets << NavSubItem.new(:forms, "Forms")
+
+  custom = NavItem.new(:custom, "A Custom Tab (with a really, really long name)")
+  custom << NavSubItem.new(:item1, "A Custom Action")
+  custom << NavSubItem.new(:item2, "Another Custom Action")
+  custom << NavSubItem.new(:item3, "Yet Another Custom Action")
+  custom << NavSubItem.new(:item3, "The Last Action")
+
+  settings = NavItem.new(:settings, "Settings")
+
+  @nav = [dashboard, content, design, assets, custom]
+
+
 !!!
 %html{html_attrs}
   %head
     %meta{"http-equiv"=>"Content-type", :content=>"text/html; charset=utf-8"}/
-    %title= @title || "Radiant CMS - Publishing for Small Teams"
-    %link{:href=>"/admin/stylesheets/main.css", :media=>"screen", :rel=>"stylesheet", :type=>"text/css"}/
+    %title= @title || "Radiant Blade (CSS Mockup)"
+    %link{:href=>"/admin/stylesheets/blade.sass", :media=>"screen", :rel=>"stylesheet", :type=>"text/css"}/
     %script{:src=>"/admin/javascripts/prototype.js", :type=>"text/javascript"}
     %script{:src=>"/admin/javascripts/effects.js", :type=>"text/javascript"}
     %script{:src=>"/admin/javascripts/lowpro.js", :type=>"text/javascript"}
@@ -14,59 +70,45 @@
     %script{:src=>"/admin/javascripts/ruledtable.js", :type=>"text/javascript"}
     %script{:src=>"/admin/javascripts/sitemap.js", :type=>"text/javascript"}
     %script{:src=>"/admin/javascripts/application.js", :type=>"text/javascript"}
-    <!--[if lt IE 7]>
-    %script{:type=>"text/javascript", :src=>"/admin/javascripts/pngfix.js"}
-    <![endif]-->
+    /[if lt IE 7]
+      %script{:type=>"text/javascript", :src=>"/admin/javascripts/pngfix.js"}
     = yield :meta
   %body
     #page
-      #header
-        #site-title
-          %a{:href=>"/admin/"} Radiant CMS
-        #site-subtitle
-          Publishing for Small Teams 
-        - unless @logged_out
-          #navigation
-            - if @selected == :pages
-              %strong
-                %a{:href=>"/admin/pages/"} Pages
-            - else
-              %a{:href=>"/admin/pages/"} Pages
-            %span.separator=" | "
-            - if @selected == :snippets
-              %strong
-                %a{:href=>"/admin/snippets/"} Snippets
-            - else
-              %a{:href=>"/admin/snippets/"} Snippets
-            %span.separator=" | "
-            - if @selected == :layouts
-              %strong
-                %a{:href=>"/admin/layouts/"} Layouts
-            - else
-              %a{:href=>"/admin/layouts/"} Layouts
-      %hr{:class=>"hidden"}/
+      - unless @logged_out
+        #navigation
+          #nav-meta
+            %a{:href=>""}Settings
+            %span &nbsp;|&nbsp;
+            %a{:href=>"#"}Log Out
+            %span &nbsp;|&nbsp;
+            %a{:href=>"#view-site-popup", :id=>"view-site", :onclick=>"return false"}View Site
+
+          %ul#nav-content
+            - @nav.each do |primary_item|
+              %li{:class=>(primary_item[@selected] ? 'current' : nil)}
+                %a{:href=>(primary_item.first.url unless primary_item.first.nil?)}><
+                  = primary_item.proper_name
+                  %b>
+                %span.hidden :&nbsp;
+                %span.nav-secondary
+                  - primary_item.each_index do |secondary_item_index|
+                    - unless secondary_item_index == 0
+                      %span.hidden>< &nbsp;|&nbsp;
+                    %a{:href=>primary_item[secondary_item_index].url, :class=>(primary_item[secondary_item_index].name == @selected ? 'current' : nil)}>
+                      %span><
+                        = primary_item[secondary_item_index].proper_name
+
+          #nav-footer
+            %div
+
+      %hr.hidden
+
       #main
-        = yield :flash_message
         #content
           = yield
-      %hr{:class=>"hidden"}/
+
+      %hr.hidden
+
       #footer
-        %p This site was made with Ruby and is powered by <a href="http://radiantcms.org">Radiant CMS</a> version 0.6.5.
-        %p#site-links
-          - unless @logged_out
-            - if @selected == :users
-              %strong
-                %a{:href=>"/admin/users/"} Users
-            - else
-              %a{:href=>"/admin/users/"} Users
-            %span.separator=" | "
-            - if @selected == :extensions
-              %strong
-                %a{:href=>"/admin/extensions/"} Extensions
-            - else
-              %a{:href=>"/admin/extensions/"} Extensions
-            %span.separator=" | "
-            %a{:href=>"/admin/logout/"} Log Out
-            %span.separator=" | "
-          %a{:href=>"/"}
-            %img{:src=>"/admin/images/view-site.gif", :alt=>"View Site", :title=>""}/
+        %p This site was made with Ruby and is powered by <a href="http://radiantcms.org">Radiant CMS</a> version 0.7.

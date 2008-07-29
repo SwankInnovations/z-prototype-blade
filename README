@@ -1,7 +1,7 @@
 == What is this?
 
-This is a simple HTML prototype of Radiant written in HAML that is designed
-to be viewed with serve.
+This is a prototype of the new Radiant UI (Blade) written in HAML that is 
+designed to be viewed with serve.
 
 What is serve? Serve is a rapid prototyping framework for Rails
 applications. It is designed to compliment Rails development and enforce a

@@ -1,4 +1,8 @@
 :ruby
+
+  # simple structure for storing a nav tab's properties
+  # holds an array of NavSubItems and can get them by
+  # index (like any array) or by their name
   class NavItem < Array
     attr_reader :name, :proper_name
 
@@ -16,6 +20,8 @@
   end
 
 
+  # simple structure for storing the properties of a
+  # tab's sub items.
   class NavSubItem
     attr_reader :name, :proper_name, :url
 
@@ -25,6 +31,10 @@
   end
 
 
+  # here the possible tabs and their sub items are defined
+  # note: just cause you create the tab doesn't mean it auto-
+  #   maticaly shows up in the layout.  You have to explicitly
+  #   define the tab-list below.
   dashboard = NavItem.new(:dashboard, "Dashboard")
   dashboard << NavSubItem.new(:activity_feed, "Activity Feed")
 
@@ -51,8 +61,9 @@
 
   settings = NavItem.new(:settings, "Settings")
 
-  @nav = [dashboard, content, design, assets, custom]
-
+  # here we explicitly call out the tab list
+  @nav = [dashboard, content, design, custom]
+  
 
 
 !!!
@@ -87,15 +98,15 @@
 
           %ul#nav-content
             - @nav.each do |primary_item|
-              %li{:class=>(primary_item[@selected_subitem] ? 'current' : nil)}
+              %li{:class=>(primary_item[@selected] ? 'current' : nil)}
                 %a{:href=>(primary_item.first.url unless primary_item.first.nil?)}
                   = primary_item.proper_name
                   %b
-                - if primary_item[@selected_subitem]
+                - if primary_item[@selected]
                   %ul#nav-sub
                     - primary_item.each do |sub_item|
                       %li
-                        %a{:href=>sub_item.url, :class=>(sub_item.name == @selected_subitem ? 'current' : nil)}>
+                        %a{:href=>sub_item.url, :class=>(sub_item.name == @selected ? 'current' : nil)}>
                           %span
                             = sub_item.proper_name
 

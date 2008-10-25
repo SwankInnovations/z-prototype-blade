@@ -53,29 +53,7 @@
 
   @nav = [dashboard, content, design, assets, custom]
 
-- content_for :meta do
-  :javascript
-    var currentTab
-    Event.observe(window, 'load', function() {
-      $('nav-content').childElements().each(function(s, index) {
-        if (s.classNames().include('current')) {
-          // set current tab for later use
-          currentTab = s
-        } else {
-          // attach mouseover and mouseout events
-          s.observe('mouseover', dimCurrentTab);
-          s.observe('mouseout', restoreCurrentTab);
-        };
-      });
-    });
 
-    function dimCurrentTab() {
-      currentTab.addClassName('dimmed');
-    }
-
-    function restoreCurrentTab() {
-      currentTab.removeClassName('dimmed');
-    }
 
 !!!
 %html{html_attrs}
@@ -109,18 +87,17 @@
 
           %ul#nav-content
             - @nav.each do |primary_item|
-              %li{:class=>(primary_item[@selected] ? 'current' : nil)}
-                %a{:href=>(primary_item.first.url unless primary_item.first.nil?)}><
+              %li{:class=>(primary_item[@selected_subitem] ? 'current' : nil)}
+                %a{:href=>(primary_item.first.url unless primary_item.first.nil?)}
                   = primary_item.proper_name
-                  %b>
-                %span.hidden :&nbsp;
-                %span.nav-secondary
-                  - primary_item.each_index do |secondary_item_index|
-                    - unless secondary_item_index == 0
-                      %span.hidden>< &nbsp;|&nbsp;
-                    %a{:href=>primary_item[secondary_item_index].url, :class=>(primary_item[secondary_item_index].name == @selected ? 'current' : nil)}>
-                      %span><
-                        = primary_item[secondary_item_index].proper_name
+                  %b
+                - if primary_item[@selected_subitem]
+                  %ul#nav-sub
+                    - primary_item.each do |sub_item|
+                      %li
+                        %a{:href=>sub_item.url, :class=>(sub_item.name == @selected_subitem ? 'current' : nil)}>
+                          %span
+                            = sub_item.proper_name
 
           #nav-footer
             %div

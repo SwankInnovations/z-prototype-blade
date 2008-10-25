@@ -1,0 +1,279 @@
+body {
+  font-size: 95%;
+  font-family: "Lucida Grande", "Bitstream Vera Sans", Helvetica, Verdana, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.clear {
+  clear: both;
+}
+
+/* * * *  Navigation Section  * * * */
+#nav {
+  font-size: 90%;
+  background: #c00 url(nav-bkgd.gif) repeat-x;
+  width: 100%;
+  padding-top: 6px;
+  position: relative;
+}
+#nav-meta {
+  color: #f5cbcb;
+  font-size: 80%;
+  margin: 0;
+  float: right;
+  padding: 8px 80px 0 5px;
+  line-height: 16px;
+}
+#nav-meta a, #nav-meta a:visited {
+  color: white;
+}
+#nav-meta a:hover, #nav-meta strong a {
+  text-decoration: none;
+}
+#nav-meta #view-site {
+  font-size: 90%;
+  background: url(view-site.png) no-repeat;
+  display: block;
+  position: absolute;
+  right: 12px;
+  top: 14px;
+  height: 17px;
+  width: 64px;
+  line-height: 17px;
+  padding-left: 1px;
+  text-align: center;
+  text-decoration: none;
+}
+#nav-content {
+  float:left;
+}
+#nav-content .separator {
+  display: none;
+}
+#nav-content a {
+  margin: 4px 13px 0 8px;
+  padding: 0 0 0 13px;
+  float: left;
+  color: #edd;
+  text-decoration: none;
+  height: 30px;
+  line-height: 30px;
+  white-space: nowrap;
+  background: url(nav-tabs.png) left top no-repeat;
+  position: relative;
+}
+#nav-content a b {
+  position: absolute;
+  right: -13px;
+  top: 0;
+  width: 13px;
+  background: url(nav-tabs.png) right top no-repeat;
+  height: 30px;
+}
+#nav-content a:hover {
+  background-position: left -31px;
+  color: #fff;
+}
+#nav-content a:hover b {
+  background-position: right -31px;
+  color: #fff;
+}
+#nav-content a.current {
+  color: #000;
+  font-weight: bold;
+  background-position: left -62px;
+}
+#nav-content a.current b {
+  background-position: right -62px;
+}
+#nav-secondary {
+  font-size: 84%;
+  font-weight: bold;
+  clear: both;
+  height: 40px;
+  padding: 0 5px;
+  background: #ccc url(nav-secondary-bkgd.gif) repeat-x;
+}
+#nav-secondary a {
+  margin: 11px 11px 0 2px;
+  padding-left: 11px;
+  float: left;
+  color: #000;
+  text-decoration: none;
+  line-height: 20px;
+  white-space: nowrap;
+  background: url(nav-secondary-breadcrumbs.png) left 24px no-repeat;
+  height: 22px;
+  position: relative;
+}
+#nav-secondary a b {
+  position: absolute;
+  right: -11px;
+  top: 0;
+  width: 11px;
+  height: 22px;
+  background: url(nav-secondary-breadcrumbs.png) right 24px no-repeat;
+}
+#nav-secondary a:hover {
+  background-position: left top;
+}
+#nav-secondary a:hover b {
+  background-position: right top;
+}
+#nav-secondary a.current {
+  font-weight: normal;
+  color: #fff;
+  margin-left: 5px;
+  background-position: left -22px;
+}
+#nav-secondary a.current b {
+  background-position: right -22px;
+}
+
+
+/* * * *  Content Section  * * * */
+#content {
+  background: #fff;
+  clear: both;
+  width: 100%;
+  position: relative;
+}
+#nav-shadow {
+  position: relative;
+  width: 100%;
+  height: 4px;
+  margin-bottom: -4px;
+  background: url(nav-shadow.png) repeat-x;
+  font-size: 3px;
+  top: 0;
+}
+
+
+/* * * *  Form Areas  * * * */
+#content .form-area {
+  background: #a3a3a3;
+  padding: 10px 20px;
+}
+#content .form-area label {
+  color: #fff;
+  font-weight: bold;
+}
+#content .form-area .title {
+  margin:0;
+}
+#content .form-area .title label {
+  font-size: 95%;
+  position: relative;
+}
+#content .form-area .title .textbox {
+  font-family: Georgia,Palatino,"Times New Roman",Times,serif;
+  font-size: 200%;
+  width: 100%;
+  display: block;
+}
+#content table.fieldset {
+  margin: 0 15px;
+  border-bottom: 1px solid #a3a3a3;
+  margin-bottom: .3em;
+  border-collapse: collapse;
+}
+#content table.fieldset td {
+  border-top: 1px solid #a3a3a3;
+  padding: 6px;
+}
+#content .fieldset td.field {
+  width: 100%;
+}
+#content .fieldset td.label {
+  padding: 0;  
+}
+#content .fieldset td.label label {
+  font-size: 90%;
+  font-weight: normal;
+}
+#content .fieldset td.field .textbox {
+  width: 99.7%;
+  font-size: 100%;
+  margin-left: 5px;
+}
+
+
+/* * * *  Extended Metadata  * * * */
+#extended-metadata {
+  background: url(metadata-bkgd-normal.png);
+  width: 100%;
+  padding: 15px 0 10px 0;
+  margin: 0 2px;
+}
+#extended-metadata.hovering {
+  background-image: url(metadata-bkgd-hover.png);
+}
+#content a.more-or-less {
+    text-decoration: none;
+    color: #fff;
+}
+#content a.more-or-less small {
+  font-size: 76%;
+  margin: 0 5px 0 2px;
+  padding:  3px 0 4px 11px;
+  float: left;
+  height: 13px;
+  background: url(metadata-tabs.png) left bottom no-repeat;
+  position: relative;
+}
+#content a.more-or-less b {
+  background: url(metadata-tabs.png) -123px bottom no-repeat;
+  position: absolute;
+  width: 5px;
+  height: 20px;
+  bottom: 0;
+  right: -5px;
+}
+#content a.more-or-less:hover small {
+  background-position: -129px bottom;
+}
+#content a.more-or-less:hover b {
+  background-position: bottom right;
+}
+#content a.more-or-less span.tab-text {
+  background: url(metadata-chevrons.png) 96% 3px no-repeat;
+}
+#content #less-extended-metadata span.tab-text {
+  background-position: 96% -14px;
+}
+/* I'm not so keen on using <em> elements */
+#content a.more-or-less em {
+  visibility: hidden;
+  width: 5px;
+  margin-left: -5px;
+}
+
+/* * * *  Popups  * * * */
+.view-site-popup {
+  background: #fff;
+  /*border: 5px solid #a3a3a3;*/
+  width: 160px;
+  opacity:.80;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  padding: 3px;
+}
+
+.view-site-popup a {
+  white-space: nowrap;
+  display: block;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1.7;
+  padding: 2px 8px;
+  text-decoration: none;
+  color: #000;
+}
+.view-site-popup a:hover {
+  color: #fff;
+  opacity:.80;
+  filter: alpha(opacity=80);
+  -moz-opacity: 0.8;
+  background: #c00;
+}

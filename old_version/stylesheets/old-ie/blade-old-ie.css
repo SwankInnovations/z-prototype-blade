@@ -1,0 +1,65 @@
+#nav-meta #view-site {
+  background: none;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='stylesheets/view-site.png',sizingMethod='crop')  
+}
+#nav-content a, #nav-content a b {
+  background-image: url(nav-tabs.gif);
+}
+#nav-secondary a, #nav-secondary a b {
+  background-image: url(nav-secondary-breadcrumbs.gif);
+}
+#nav-shadow {
+  background: none;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='stylesheets/nav-shadow.png',sizingMethod='scale')
+}
+#extended-metadata {
+  background-image: url(metadata-bkgd-normal.gif);
+}
+#extended-metadata.hovering {
+  background-image: url(metadata-bkgd-hover.gif);
+}
+#content a.more-or-less small, #content a.more-or-less b {
+  background-image: url(metadata-tabs.gif);
+}
+#content a.more-or-less span.tab-text {
+  background-image: url(metadata-chevrons.gif);
+}
+
+/*
+#content {
+  margin-top: -19px;
+}*/
+
+/* Notes on Method B (which doesn't work) 
+   Stupid IE - positions it right but alphaimageloader doesn't want to 
+   render over the margins of the <a> box's margins. This is NOT a
+   hasLayout problem.  Beats me what it is...
+   
+   Span is set to width: 1px but AlphaImageLoder auto adjusts width.
+   
+   AlphaImageLoader uses paths relative to the page being rendered - ouch.
+*/
+/*
+#content-nav2 a {
+  background:none;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='old-ie/nav-tab-l-normal.png',sizingMethod='crop')
+}
+#content-nav2 a:hover {
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='old-ie/nav-tab-l-hover.png',sizingMethod='crop')
+}
+#content-nav2 a.active {
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='old-ie/nav-tab-l-active.png',sizingMethod='crop')
+}
+
+#content-nav2 a b {
+  right:-6px; 
+  width: 1px;
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='old-ie/nav-tab-r-active.png')
+}
+#content-nav2 a:hover b {
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='old-ie/nav-tab-r-hover.png',sizingMethod='crop')
+}
+#content-nav2 a.active b {
+  filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='old-ie/nav-tab-r-active.png',sizingMethod='crop')
+}
+*/

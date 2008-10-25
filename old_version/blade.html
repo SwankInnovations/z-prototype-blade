@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <title>Radiant Blade (CSS Mockup)</title>
+    <link href="stylesheets/blade.css" media="screen" rel="Stylesheet" type="text/css" />
+    <script type="text/javascript" src="javascripts/prototype.js"></script>
+    <script type="text/javascript" src="javascripts/effects.js"></script>
+    <script type="text/javascript" src="javascripts/metadata.js"></script>
+    <script type="text/javascript" src="javascripts/shadow.js"></script>
+    <script type="text/javascript" src="javascripts/control.modal.js"></script>
+    <!--[if lt IE 7]><style type="text/css" media="screen">@import "stylesheets/old-ie/blade-old-ie.css";</style><![endif]-->
+    <style>
+      #content li {
+        padding-bottom: 1em;
+        line-height: 1.3;
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="nav">
+      
+      <div id="nav-meta">
+        <a href="#">Settings</a>
+        <span> | </span>
+        <a href="#">Log Out</a>
+        <span> | </span>
+        <a href="#view-site-popup" id="view-site" onclick="return false">View Site</a>
+      </div>
+
+      <div id="nav-content">
+        <strong><a class="current">Pages<b></b></a></strong>
+        <span class="separator"> | </span>
+        <a href="#">Snippets<b></b></a>
+        <span class="separator"> | </span>
+        <a href="#">Layouts<b></b></a>
+        <span class="separator"> | </span>
+        <a href="#">Another Tab (With a Really, Really Long Name)<b></b></a>
+        <span class="separator"> | </span>
+        <a href="#">Files<b></b></a>
+      </div>
+      
+      <div id="nav-secondary">
+        <a href="#">Site Map<b></b></a>
+        <a href="#">Edit Page<b></b></a>
+        <a class="current shadowed">Edit Comments<b></b></a>
+      </div>
+
+    </div>
+
+
+    <div id="content">
+      <div id="nav-shadow"></div>
+      
+      <div class="form-area">
+        <div class="title">
+          <label for="page_title" class="shadowed">Page Title</label>
+          <input class="textbox" id="page_title" maxlength="255" name="page[title]" size="255" type="text">
+        </div> 
+      
+        <div id="extended-metadata" class="row" style="display: none;">
+          <table class="fieldset"><tbody>
+            <tr>
+              <td class="label"><label for="page_slug">Slug</label></td>
+              <td class="field"><input class="textbox" id="page_slug" maxlength="100" name="page[slug]" size="100" value="/" type="text"></td>
+            </tr>
+            <tr>
+              <td class="label"><label for="page_breadcrumb">Breadcrumb</label></td>
+              <td class="field"><input class="textbox" id="page_breadcrumb" maxlength="160" name="page[breadcrumb]" size="160" value="Home" type="text"></td>
+            </tr>
+          </tbody></table>
+        </div>
+
+        <a href="#" onclick="toggleMetadata();return false;" class="more-or-less" id="more-extended-metadata">
+          <small>
+            <span class="tab-text shadowed">Metadata <em>(+)</em></span><b></b>
+          </small>
+          <div class="clear"></div>
+        </a>
+
+        <script type="text/javascript">
+          function makeBlue(){
+            document.getElementById("nav").style.background = "#005DBE url(nav-bkgd-cool.gif) repeat-x";
+            document.getElementsByClassName("form-area")[0].style.background = "url(crumpled-bkgd.png)";
+          }
+        </script>
+        <p>New in this revision:</p>
+        <ul>
+          <li>Added text shadowing.  Turns out Mephisto uses the CSS3 'text-shadow' attribute that Safari accepts but no other browser does (which is why I didn't see it in FF).  So, I used a prototype based script to add the shadowing for all of our tested browsers (with one styling bug -- IE doesn't currently render the text shadow on 'Metadata'.  Good enough for now).</li>
+          <li>Created the Metadata section and even added a scriptaculous effect on opening/closing.  I had no idea what you were thinking for styling in there so I guessed and stole from the existing Radiant design.</li>
+          <li>Created the 'view site' button.  I enhanced the behavior using a modal window -- let me know what you think. (No, I don't like the visual design either, it's the conceptual design I'm talking about, here).</li>
+          <li>Added a mouseover image to the secondary navigation links.  I'm not sure I like it better than the previous underline-on hover, though.  That simplicity was nice.  I could, however, see setting up links on the right hand side of the secondary nav for contextual things like 'help' or 'render page' and they could use a style like that.</li>
+          <li>Played more with the whole translucency bit (IE6 still doesn't get it, though). It's pretty cool. Check out the tabs and metadata area <a href="javascript:makeBlue();" >when you change the background colors and images</a>!</li>
+        </ul>
+      </div>
+    </div>
+    <div id="popups" style="display:none">
+      <div id="view-site-popup" class="view-site-popup">
+        <a href="#">Published (Live) Site</a>
+        <a href="#">Development Site</a>
+      </div>
+    </div>
+    <script type="text/javascript">
+      new Control.Modal('view-site',{
+        hover: true,
+        position: 'relative',
+        containerClassName: 'view-site-popup',
+        offsetTop: 15,
+        offsetLeft: -98
+      });
+    </script>
+  </body>
+</html>
